@@ -8,14 +8,16 @@
  * and the oldest value is deleted.
  */
 
+int GROSSE_NEGATIVE_ZAHL = -100000;
+
 int num = 60;
 float mx[] = new float[num];
 float my[] = new float[num];
 
 color colors[] = new color[num];
 
-int previousMouseX = -1;
-int previousMouseY = -1;
+int previousMouseX = GROSSE_NEGATIVE_ZAHL;
+int previousMouseY = GROSSE_NEGATIVE_ZAHL;
 
 int FAKTOR_VERLANGSAMEN = 0; // > 1 dann wird der Prozess entsprechend verlangsamt; z.B. Faktor 4 oder 10;
 
@@ -30,7 +32,7 @@ void setup() {
       // System.out.println(n);
   }
 
-  size(640, 360);
+  size(1040, 900);
   noStroke();
 }
 
@@ -57,18 +59,25 @@ void draw() {
 
   background(51);
 
-  // if (previousMouseX == mouseX && previousMouseY == mouseY) {
-  //   return;
-  // }
+  if (previousMouseX == mouseX && previousMouseY == mouseY) {
+    mx[pos] = GROSSE_NEGATIVE_ZAHL;
+    my[pos] = GROSSE_NEGATIVE_ZAHL;
+  } else {
+    mx[pos] = mouseX;
+    my[pos] = mouseY;
+  }
 
-  mx[pos] = mouseX;
-  my[pos] = mouseY;
 
   // render first ellipse
 
   for (int i = 0; i < num - 1; i++) {
     // pos+1 is the smallest (the oldest in the array)
     int index = (pos+1 + i) % num;
+
+    if (mx[index] == GROSSE_NEGATIVE_ZAHL) {
+        // ich brauche dann nicht auf my[index] zu testen...
+        continue;
+    }
 
     color c = colors[index];
     fill(c);
