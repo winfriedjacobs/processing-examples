@@ -5,7 +5,8 @@
  */
  
 int rad = 60;        // Width of the shape
-float xpos, ypos;    // Starting position of shape    
+int rad2 = rad + 1;
+float xpos, ypos;    // Starting position of shape
 
 float xspeed = 15;  // Speed of the shape
 float yspeed = 15;  // Speed of the shape
@@ -13,8 +14,7 @@ float yspeed = 15;  // Speed of the shape
 int xdirection = 1;  // Left or Right
 int ydirection = 1;  // Top to Bottom
 
-int backgroundColor = 102;
-color backgroundColor2 = color(102, 102, 102);
+color backgroundColor = color(102, 102, 102);
 color objectColor = color(0, 200, 0);
 
 
@@ -28,7 +28,7 @@ void setup()
   xpos = width/2;
   ypos = height/2;
 
-  background(backgroundColor2);
+  background(backgroundColor);
 }
 
 void renderEllipse(color c){
@@ -36,14 +36,19 @@ void renderEllipse(color c){
     ellipse(xpos, ypos, rad, rad);
 }
 
+void renderEllipse2(color c){
+    fill(c);
+    ellipse(xpos, ypos, rad2, rad2);
+}
+
 void draw() 
 {
+  renderEllipse2(backgroundColor);
+  // background(backgroundColor);
 
-  renderEllipse(backgroundColor2);
-  
   // Update the position of the shape
-  xpos = xpos + ( xspeed * xdirection );
-  ypos = ypos + ( yspeed * ydirection );
+  xpos = xpos + (xspeed * xdirection);
+  ypos = ypos + (yspeed * ydirection);
   
   // Test to see if the shape exceeds the boundaries of the screen
   // If it does, reverse its direction by multiplying by -1
