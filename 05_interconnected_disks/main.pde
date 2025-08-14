@@ -54,6 +54,7 @@ void setup()
 
 
 void draw() {
+    background(backgroundColor);
     for (Disc d : discs) {
         d.draw();
     }
@@ -119,8 +120,12 @@ class Disc {
     }
 
     void draw() {
-      // was the draw function
-      this.renderDelete();
+      // was the main draw function
+
+      // this.renderDelete();
+      // instead: "background(backgroundColor)" in the main draw function
+
+
       this.updatePosition();
       this.render();
 
