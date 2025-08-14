@@ -30,12 +30,7 @@ void draw() {
   disc.renderDelete();
   // background(backgroundColor);
 
-
-  disc.updateDirection();
-
   disc.updatePosition();
-
-
 
   disc.render();
 
@@ -79,11 +74,7 @@ class Disc {
     }
 
     void updatePosition() {
-      this.xpos += (this.xspeed * this.xdirection);
-      this.ypos += (this.yspeed * this.ydirection);
-    }
 
-    void updateDirection() {
       // Test to see if the shape exceeds the boundaries of the screen
       // If it does, reverse its direction by multiplying by -1
       if (this.xpos > width - this.rad || this.xpos < this.rad) {
@@ -92,6 +83,10 @@ class Disc {
       if (this.ypos > height - this.rad || this.ypos < this.rad) {
         this.ydirection *= -1;
       }
+
+
+      this.xpos += (this.xspeed * this.xdirection);
+      this.ypos += (this.yspeed * this.ydirection);
     }
 
     void changeSpeed() {
