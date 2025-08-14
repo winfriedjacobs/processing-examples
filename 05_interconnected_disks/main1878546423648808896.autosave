@@ -1,16 +1,13 @@
 /**
- * Bounce.
+ * Bounce. 
  * 
  * When the shape hits the edge of the window, it reverses its direction. 
  */
-
-import java.util.ArrayList;
-import java.util.List;
-
-
+ 
 color backgroundColor = color(102, 102, 102);
 
-List<Disc> discs = new ArrayList<Disc>();
+Disc discs[] = new [];
+
 
 void setup() 
 {
@@ -23,29 +20,15 @@ void setup()
     new Disc(
       width/2, // xpos,
       height/2, // ypos
-      color(0, 200, 0),
-      25, // xspeed
-      25 // yspeed
+      color(0, 200, 0)
     )
   );
 
   discs.add(
     new Disc(
-      width/4, // xpos,
-      height/4, // ypos
-      color(200, 0, 0),
-      15, // xspeed
-      15 // yspeed
-    )
-  );
-
-  discs.add(
-    new Disc(
-      width/4, // xpos,
-      height/4, // ypos
-      color(200, 100, 100),
-      5, // xspeed
-      5 // yspeed
+      0, // xpos,
+      0, // ypos
+      color(200, 0, 0)
     )
   );
 
@@ -54,8 +37,8 @@ void setup()
 
 
 void draw() {
-    for (Disc d : discs) {
-        d.draw();
+    for (Disc d in discs) {
+      d.draw();
     }
 }
 
@@ -64,13 +47,13 @@ class Disc {
     public int rad = 60;
     public int rad2 = 60 + 1;
 
-    // Starting position of shape
-    public float xpos;
-    public float ypos;
-
     // Speed of the shape
     public float xspeed = 15;
     public float yspeed = 5;
+
+    // Starting position of shape
+    public float xpos;
+    public float ypos;
 
     public int xdirection = 1;  // Left or Right
     public int ydirection = 1;  // Top or Bottom
@@ -78,12 +61,10 @@ class Disc {
     color backgroundColor = color(102, 102, 102);
     color fillColor;
 
-   public Disc(float xpos, float ypos, color c, float xspeed, float yspeed){
+    public Disc(float xpos, float ypos, color c){
         this.xpos = xpos;
         this.ypos = ypos;
         this.fillColor = c;
-        this.xspeed = xspeed;
-        this.yspeed = yspeed;
     }
 
     void render() {
