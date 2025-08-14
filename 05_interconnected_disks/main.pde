@@ -61,16 +61,16 @@ class Disc {
         this.fillColor = c;
     }
 
-    void renderDelete() {
-        fill(backgroundColor);
-        ellipse(this.xpos, this.ypos, this.rad, this.rad);
-    }
-
     void render() {
       if (xspeed > 0 && yspeed > 0) {
         fill(this.fillColor);
         ellipse(this.xpos, this.ypos, this.rad, this.rad);
       }
+    }
+
+    void renderDelete() {
+        fill(backgroundColor);
+        ellipse(this.xpos, this.ypos, this.rad2, this.rad2);
     }
 
     void updatePosition() {
@@ -83,7 +83,6 @@ class Disc {
       if (this.ypos > height - this.rad || this.ypos < this.rad) {
         this.ydirection *= -1;
       }
-
 
       this.xpos += (this.xspeed * this.xdirection);
       this.ypos += (this.yspeed * this.ydirection);
