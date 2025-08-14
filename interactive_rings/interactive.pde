@@ -10,7 +10,7 @@
 
 int BIG_NEGATIVE_NUMBER = -100000;
 
-color backgroundColor = color(51, 51, 51);
+color backgroundColor = color(251, 251, 251);
 
 int num = 60;
 float mx[] = new float[num];
@@ -32,7 +32,11 @@ void setup() {
   }
 
   size(1040, 900);
-  noStroke();
+
+  // in this version, we render only the rings:
+  // noStroke();
+  noFill();
+  strokeWeight(2);
 }
 
 void draw() {
@@ -76,8 +80,11 @@ void draw() {
     }
 
     color c = colors[index];
-    fill(c);
-    ellipse(mx[index], my[index], i, i);
+
+    // fill(c);
+    stroke(c);
+
+    ellipse(mx[index], my[index], i*2, i*2);
   }
 
 }
