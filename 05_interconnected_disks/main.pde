@@ -30,9 +30,12 @@ void draw() {
   disc.renderDelete();
   // background(backgroundColor);
 
-  disc.updatePosition();
 
   disc.updateDirection();
+
+  disc.updatePosition();
+
+
 
   disc.render();
 
@@ -41,18 +44,15 @@ void draw() {
 
 
 class Disc {
-    public int x;
-    public int y;
-
     public int rad = 60;
     public int rad2 = 60 + 1;
+
+    public float xspeed = 15;  // Speed of the shape, may be negative
+    public float yspeed = 15;  // Speed of the shape, may be negative
 
     // Starting position of shape
     public float xpos;
     public float ypos;
-
-    public float xspeed = 15;  // Speed of the shape
-    public float yspeed = 15;  // Speed of the shape
 
     public int xdirection = 1;  // Left or Right
     public int ydirection = 1;  // Top or Bottom
