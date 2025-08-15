@@ -1,4 +1,4 @@
-/**
+ /**
  * Bounce.
  * 
  * When the shape hits the edge of the window, it reverses its direction. 
@@ -11,9 +11,6 @@ color backgroundColor = color(230,230,230);  // 102
 
 List<Disc> discs = new ArrayList<Disc>();
 
-int COUNT_DISKS = 10;
-int OPACITY = 50;  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
-
 void setup() 
 {
   size(1000, 800);
@@ -21,11 +18,54 @@ void setup()
   frameRate(30);
   ellipseMode(RADIUS);
 
-  for(int i = 0; i < COUNT_DISKS; i++) {
-      discs.add(
-        new Disc()
-    );
-  }
+  discs.add(
+    new Disc(
+      width/2, // xpos,
+      height/2, // ypos
+      color(0, 200, 0, 128),
+      -5, // xspeed
+      -5, // yspeed
+      -1, // xdirection
+      1 // ydirection
+    )
+  );
+
+  discs.add(
+    new Disc(
+      width/4, // xpos,
+      height/4, // ypos
+      color(200, 0, 0, 128),
+      -2, // xspeed
+      -3, // yspeed
+      1, // xdirection
+      -1 // ydirection
+    )
+  );
+
+  discs.add(
+    new Disc(
+      width/4, // xpos,
+      height/4, // ypos
+      color(200, 100, 100, 128),
+      -1, // xspeed
+      -1, // yspeed
+      -1, // xdirection
+      -1 // ydirection
+    )
+  );
+
+  discs.add(
+    new Disc(
+      width/4, // xpos,
+      height/4, // ypos
+      color(100, 200, 200, 128),
+      -2, // xspeed
+      -3, // yspeed
+      -1, // xdirection
+      -1 // ydirection
+    )
+  );
+
   background(backgroundColor);
 }
 
@@ -59,21 +99,19 @@ class Disc {
     color backgroundColor = color(102, 102, 102);
     color fillColor;
 
-   public Disc(){
-        this.fillColor = randomColor();
+   public Disc(float xpos, float ypos, color c, float xspeed, float yspeed, int xdirection, int ydirection){
+        this.xpos = xpos;
+        this.ypos = ypos;
+        this.fillColor = c;
 
-        this.xspeed = randomSpeed();
-        this.yspeed = randomSpeed();
+        this.xspeed = xspeed >= 0 ? xspeed : random(1, 10);
+        this.yspeed = yspeed >= 0 ? yspeed : random(1, 10);
 
-        this.xdirection = randomDirection();
-        this.ydirection = randomDirection();
+        this.xdirection = xdirection;
+        this.ydirection = ydirection;
 
         this.rad = (int)random(30, 90);
         this.rad2 = (int)this.rad + 1;
-
-        this.xpos = randomXPos(this.rad);
-        this.ypos = randomYPos(this.rad);
-
     }
 
     void render() {
@@ -121,36 +159,3 @@ class Disc {
       // this.changeSpeed();
     }
   }
-
-
-int randomDirection() {
-    int x = (Math.random() < 0.5) ? 0 : 1;
-    if(x == 0) return -1;
-    else return 1;
-}
-
-
-float randomSpeed() {
-    return random(0.1, 3);
-}
-
-color randomColor() {
-    int min = 0;
-    int max = 255;
-
-    int r = (int)random(min, max);
-    int g = (int)random(min, max);
-    int b = (int)random(min, max);
-
-    return color(r, g, b, OPACITY);
-}
-
-
-int randomXPos(int radius) {
-    return (int)random(radius, width - radius);
-}
-
-int randomYPos(int radius) {
-    // return height / 2 + radius;
-    return (int)random(radius, height - radius);
-}
