@@ -1,4 +1,4 @@
-/**
+    /**
  * Bounce.
  * 
  * When the shape hits the edge of the window, it reverses its direction. 
@@ -54,18 +54,6 @@ void setup()
     )
   );
 
-  discs.add(
-    new Disc(
-      width/4, // xpos,
-      height/4, // ypos
-      color(100, 200, 200, 128),
-      2, // xspeed
-      3, // yspeed
-      -1, // xdirection
-      -1 // ydirection
-    )
-  );
-
   background(backgroundColor);
 }
 
@@ -82,8 +70,8 @@ void draw() {
 
 
 class Disc {
-    public int rad;
-    public int rad2;
+    public int rad = 60;
+    public int rad2 = 60 + 1;
 
     // Starting position of shape
     public float xpos;
@@ -107,9 +95,6 @@ class Disc {
         this.yspeed = yspeed;
         this.xdirection = xdirection;
         this.ydirection = ydirection;
-
-        this.rad = (int)random(30, 90);
-        this.rad2 = (int)this.rad + 1;
     }
 
     void render() {
@@ -155,5 +140,5 @@ class Disc {
       this.render();
 
       // this.changeSpeed();
-    }
-  }
+}
+}
