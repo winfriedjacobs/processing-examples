@@ -12,7 +12,7 @@ color backgroundColor = color(230,230,230);  // 102
 List<Disc> discs = new ArrayList<Disc>();
 
 int COUNT_DISKS = 10;
-int OPACITY = 50;  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
+int MAX_OPACITY = 50;  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
 
 void setup() 
 {
@@ -43,7 +43,6 @@ void draw() {
 
 class Disc {
     public int rad;
-    public int rad2;
 
     // Starting position of shape
     public float xpos;
@@ -56,11 +55,11 @@ class Disc {
     public int xdirection = 1;  // Left or Right
     public int ydirection = 1;  // Top or Bottom
 
-    color backgroundColor = color(102, 102, 102);
     color fillColor;
+    int opacity = MAX_OPACITY;
 
    public Disc(){
-        this.fillColor = randomColor();
+        this.fillColor = randomColor(this.opacity);
 
         this.xspeed = randomSpeed();
         this.yspeed = randomSpeed();
@@ -68,8 +67,7 @@ class Disc {
         this.xdirection = randomDirection();
         this.ydirection = randomDirection();
 
-        this.rad = (int)random(30, 90);
-        this.rad2 = (int)this.rad + 1;
+        this.rad = randomRadius();
 
         this.xpos = randomXPos(this.rad);
         this.ypos = randomYPos(this.rad);
@@ -77,15 +75,13 @@ class Disc {
     }
 
     void render() {
-      if (xspeed > 0 && yspeed > 0) {
+        // the disc:
         fill(this.fillColor);
         ellipse(this.xpos, this.ypos, this.rad, this.rad);
-      }
-    }
 
-    void renderDelete() {
-        fill(backgroundColor);
-        ellipse(this.xpos, this.ypos, this.rad2, this.rad2);
+        // the dot in the center:
+        fill(0,0,0, this.opacity);
+        ellipse(this.xpos, this.ypos, 3, 3);
     }
 
     void updatePosition() {
@@ -111,10 +107,6 @@ class Disc {
     void draw() {
       // was the main draw function
 
-      // this.renderDelete();
-      // instead: "background(backgroundColor)" in the main draw function
-
-
       this.updatePosition();
       this.render();
 
@@ -134,7 +126,7 @@ float randomSpeed() {
     return random(0.1, 3);
 }
 
-color randomColor() {
+color randomColor(int opacity) {
     int min = 0;
     int max = 255;
 
@@ -142,7 +134,7 @@ color randomColor() {
     int g = (int)random(min, max);
     int b = (int)random(min, max);
 
-    return color(r, g, b, OPACITY);
+    return color(r, g, b, opacity);
 }
 
 
@@ -153,4 +145,16 @@ int randomXPos(int radius) {
 int randomYPos(int radius) {
     // return height / 2 + radius;
     return (int)random(radius, height - radius);
+}
+
+int randomRadius(){
+    int min = 30;
+    int max = height/6;
+
+    // I am searching for a better way to distribute the radius with a
+    // I would like to have the focus of value distribution in the lower two-thirds, that's why I am experimenting with
+    // the definition of maxRadius
+
+    int maxRadius = (int)random(min, max);
+    return (int)random(min, maxRadius);
 }
