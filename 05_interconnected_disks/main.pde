@@ -77,11 +77,11 @@ class Disc {
     void render() {
         // the disc:
         fill(this.fillColor);
-        ellipse(this.xpos, this.ypos, this.rad, this.rad);
+        circle(this.xpos, this.ypos, this.rad);
 
         // the dot in the center:
         fill(0,0,0, this.opacity);
-        ellipse(this.xpos, this.ypos, 3, 3);
+        circle(this.xpos, this.ypos, 3);
     }
 
     void updatePosition() {
