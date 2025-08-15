@@ -23,10 +23,10 @@ void setup()
       width/2, // xpos,
       height/2, // ypos
       color(0, 200, 0, 128),
-      5, // xspeed
-      5, // yspeed
-      -1, // xdirection
-      1 // ydirection
+      -5, // xspeed
+      -5, // yspeed
+      0, // xdirection
+      0 // ydirection
     )
   );
 
@@ -35,10 +35,10 @@ void setup()
       width/4, // xpos,
       height/4, // ypos
       color(200, 0, 0, 128),
-      2, // xspeed
-      3, // yspeed
-      1, // xdirection
-      -1 // ydirection
+      -2, // xspeed
+      -3, // yspeed
+      0, // xdirection
+      0 // ydirection
     )
   );
 
@@ -47,10 +47,10 @@ void setup()
       width/4, // xpos,
       height/4, // ypos
       color(200, 100, 100, 128),
-      1, // xspeed
-      1, // yspeed
-      -1, // xdirection
-      -1 // ydirection
+      -1, // xspeed
+      -1, // yspeed
+      0, // xdirection
+      0 // ydirection
     )
   );
 
@@ -59,10 +59,10 @@ void setup()
       width/4, // xpos,
       height/4, // ypos
       color(100, 200, 200, 128),
-      2, // xspeed
-      3, // yspeed
-      -1, // xdirection
-      -1 // ydirection
+      -2, // xspeed
+      -3, // yspeed
+      0, // xdirection
+      0 // ydirection
     )
   );
 
@@ -103,10 +103,12 @@ class Disc {
         this.xpos = xpos;
         this.ypos = ypos;
         this.fillColor = c;
-        this.xspeed = xspeed;
-        this.yspeed = yspeed;
-        this.xdirection = xdirection;
-        this.ydirection = ydirection;
+
+        this.xspeed = xspeed >= 0 ? xspeed : random(0.1, 3);
+        this.yspeed = yspeed >= 0 ? yspeed : random(0.1, 3);
+
+        this.xdirection = xdirection != 0 ? xdirection : randomDirection();
+        this.ydirection = ydirection != 0 ? ydirection : randomDirection();
 
         this.rad = (int)random(30, 90);
         this.rad2 = (int)this.rad + 1;
@@ -157,3 +159,11 @@ class Disc {
       // this.changeSpeed();
     }
   }
+
+
+
+int randomDirection() {
+    int x = (Math.random() < 0.5) ? 0 : 1;
+    if(x == 0) return -1;
+    else return 1;
+}
