@@ -11,7 +11,7 @@ import java.util.List;
 
 color backgroundColor = color(230,230,230);  // 102
 
-int COUNT_DISKS = 10;
+int COUNT_DISKS = 15;
 int MAX_OPACITY = 50;  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
 
 

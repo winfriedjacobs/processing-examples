@@ -13,8 +13,8 @@ float randomSpeed() {
 
 
 color randomColor(int opacity) {
-    int min = 0;
-    int max = 255;
+    int min = 70;
+    int max = 215;
 
     int r = (int)random(min, max);
     int g = (int)random(min, max);
