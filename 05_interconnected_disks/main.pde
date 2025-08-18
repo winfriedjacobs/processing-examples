@@ -4,8 +4,6 @@
  * When the shape hits the edge of the window, it reverses its direction. 
  */
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -15,12 +13,6 @@ color backgroundColor = color(230,230,230);  // 102
 
 int COUNT_DISKS = 10;
 int MAX_OPACITY = 50;  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
-
-
-// global values
-
-// List<Disc> discs = new ArrayList<Disc>();
-HashMap<String, Disc> discs = new HashMap<String, Disc>();
 
 
 // processing functions
