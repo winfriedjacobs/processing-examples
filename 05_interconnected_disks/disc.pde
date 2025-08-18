@@ -63,6 +63,10 @@ class Disc {
         this.yspeed = Math.max(0, this.yspeed - 0.05);
     }
 
+    Point center() {
+        return new Point(this.xpos, this.ypos);
+    }
+
     void draw() {
       // was the main draw function
 

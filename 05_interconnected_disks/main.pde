@@ -45,5 +45,6 @@ void draw() {
     background(backgroundColor);
     for (Disc d : discs.values()) {
         d.draw();
+        drawSegments();
     }
 }

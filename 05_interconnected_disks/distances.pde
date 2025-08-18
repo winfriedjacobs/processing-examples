@@ -1,27 +1,16 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
 
-// global values
-
-class Point {  // is there a standard library that provides this class?
-    public float x;
-    public float y;
-}
-
-
-class Segment {  // should not have a direction... maybe a Set?
-    public Point a;
-    public Point b;
-}
 
 // globals
 
 SortedMap<String, Disc> discs = new TreeMap<String, Disc>();
-Map<String, Segment> distances = new HashMap<String, Segment>();
+List<Segment> segments = new ArrayList<Segment>();
 
 
 void recursivelyCalculateDistances(SortedMap<String, Disc> currentDiscs) {
@@ -44,7 +33,7 @@ void recursivelyCalculateDistances(SortedMap<String, Disc> currentDiscs) {
 
 
 void calculateDistances() {
-    distances.clear();
+    segments.clear();
     recursivelyCalculateDistances(discs);
 }
 
@@ -60,6 +49,21 @@ void handleOverlapping(Disc disc1, Disc disc2) {
 
     // println("Discs: " + disc1.name + " | " + disc2.name);
     // println("distance: " + distance + " | radiusSum: " + radiusSum);
+    if(distance < radiusSum) {
+        Segment segment = new Segment(disc1, disc2);
+        // println(segment.toString() + " | distance: " + distance + " | radiusSum: " + radiusSum);
+        segments.add(segment);
+    }
+}
 
 
+void drawSegments() {
+    for(Segment segment: segments) {
+        drawSegment(segment);
+    }
+}
+
+void drawSegment(Segment segment) {
+    stroke(50);
+    line(segment.a.x, segment.a.y, segment.b.x, segment.b.y);
 }
