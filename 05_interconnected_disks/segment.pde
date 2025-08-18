@@ -17,4 +17,4 @@ class Segment {  // should not have a direction... maybe a Set?
 }
 
 
-color segmentColor = color(150, 150, 150);
+color segmentColor = color(150, 150, 150, 50);
