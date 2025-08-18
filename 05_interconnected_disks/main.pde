@@ -5,6 +5,7 @@
  */
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -16,11 +17,10 @@ int COUNT_DISKS = 10;
 int MAX_OPACITY = 50;  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
 
 
-
 // global values
 
-List<Disc> discs = new ArrayList<Disc>();
-
+// List<Disc> discs = new ArrayList<Disc>();
+HashMap<String, Disc> discs = new HashMap<String, Disc>();
 
 
 // processing functions
@@ -33,8 +33,10 @@ void setup()
   ellipseMode(RADIUS);
 
   for(int i = 0; i < COUNT_DISKS; i++) {
-      discs.add(
-        new Disc()
+      String name = "disc_" + i;
+      discs.put(
+        name,
+        new Disc(name)
     );
   }
   background(backgroundColor);
@@ -45,8 +47,11 @@ void draw() {
     if (keyPressed) {
         return;
     }
+
+    calculateDistances();
+
     background(backgroundColor);
-    for (Disc d : discs) {
+    for (Disc d : discs.values()) {
         d.draw();
     }
 }

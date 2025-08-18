@@ -1,4 +1,5 @@
 class Disc {
+    public String name;
     public int rad;
 
     // Starting position of shape
@@ -15,7 +16,8 @@ class Disc {
     color fillColor;
     int opacity = MAX_OPACITY;
 
-   public Disc(){
+   public Disc(String name){
+        this.name = name;
         this.fillColor = randomColor(this.opacity);
 
         this.xspeed = randomSpeed();
