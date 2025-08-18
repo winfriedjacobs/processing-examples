@@ -25,22 +25,21 @@ Map<String, Segment> distances = new HashMap<String, Segment>();
 
 
 void recursivelyCalculateDistances(SortedMap<String, Disc> currentDiscs) {
-    println("recursivelyCalculateDistances");
+    println("recursivelyCalculateDistances, size: " + currentDiscs.size());
 
     if (currentDiscs.size() < 2) {
-        println("size is <2");
         return;
     }
 
-    String firstKey = currentDiscs.firstKey();
-    Disc firstDisc = currentDiscs.get(firstKey);
-    SortedMap<String, Disc> other = currentDiscs.tailMap(firstKey);
+    String lastKey = currentDiscs.lastKey();
+    Disc lastDisc = currentDiscs.get(lastKey);
+    SortedMap<String, Disc> other = currentDiscs.headMap(lastKey);
 
     for (Disc otherDisc: other.values()) {
-        handleDistance(firstDisc, otherDisc);
+        handleDistance(lastDisc, otherDisc);
     }
 
-    //  recursivelyCalculateDistances(other);
+    recursivelyCalculateDistances(other);
 }
 
 
@@ -51,5 +50,5 @@ void calculateDistances() {
 
 
 void handleDistance(Disc disc1, Disc disc2) {
-    // they are always sorted ascending by their name
+    // they are always sorted descending by their name
 }
