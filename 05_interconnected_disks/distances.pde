@@ -25,7 +25,7 @@ Map<String, Segment> distances = new HashMap<String, Segment>();
 
 
 void recursivelyCalculateDistances(SortedMap<String, Disc> currentDiscs) {
-    println("recursivelyCalculateDistances, size: " + currentDiscs.size());
+    // println("recursivelyCalculateDistances, size: " + currentDiscs.size());
 
     if (currentDiscs.size() < 2) {
         return;
@@ -36,7 +36,7 @@ void recursivelyCalculateDistances(SortedMap<String, Disc> currentDiscs) {
     SortedMap<String, Disc> other = currentDiscs.headMap(lastKey);
 
     for (Disc otherDisc: other.values()) {
-        handleDistance(lastDisc, otherDisc);
+        handleOverlapping(lastDisc, otherDisc);
     }
 
     recursivelyCalculateDistances(other);
@@ -49,6 +49,17 @@ void calculateDistances() {
 }
 
 
-void handleDistance(Disc disc1, Disc disc2) {
+void handleOverlapping(Disc disc1, Disc disc2) {
     // they are always sorted descending by their name
+    // a) calculate distance and sum of radiusses
+    float xDiff = disc1.xpos - disc2.xpos;
+    float yDiff = disc1.ypos - disc2.ypos;
+
+    float distance = (float)Math.sqrt((xDiff * xDiff) + (yDiff * yDiff));
+    float radiusSum = disc1.rad + disc2.rad;
+
+    // println("Discs: " + disc1.name + " | " + disc2.name);
+    // println("distance: " + distance + " | radiusSum: " + radiusSum);
+
+
 }
