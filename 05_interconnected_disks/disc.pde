@@ -7,8 +7,8 @@ class Disc {
     public float ypos;
 
     // Speed of the shape
-    public float xspeed = 15;
-    public float yspeed = 5;
+    public float xspeed;
+    public float yspeed;
 
     public int xdirection = 1;  // Left or Right
     public int ydirection = 1;  // Top or Bottom
@@ -35,12 +35,13 @@ class Disc {
 
     void render() {
         // the disc:
+        noStroke();
         fill(this.fillColor);
         circle(this.xpos, this.ypos, this.rad);
 
         // the dot in the center:
-        fill(0,0,0, this.opacity);
-        circle(this.xpos, this.ypos, 3);
+        fill(0, 0, 0, this.opacity);
+        circle(this.xpos, this.ypos, 4);   // original 3
     }
 
     void updatePosition() {

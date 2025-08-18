@@ -7,7 +7,8 @@ int randomDirection() {
 
 
 float randomSpeed() {
-    return random(0.1, 3);
+    // return random(0.1, 3);
+    return random(0.5, 1.25);
 }
 
 
