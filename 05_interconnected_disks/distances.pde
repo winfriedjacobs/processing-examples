@@ -50,7 +50,13 @@ void handleOverlapping(Disc disc1, Disc disc2) {
     // println("Discs: " + disc1.name + " | " + disc2.name);
     // println("distance: " + distance + " | radiusSum: " + radiusSum);
     if(distance < radiusSum) {
-        Segment segment = new Segment(disc1, disc2);
+        float diff = radiusSum - distance;
+        color theColor = diff < 50
+            ? color(150, 150, 150, diff) // nur noch geringe Überlappung -> reduce opacity, starting from 50
+            : segmentColor; // uses segmentColor
+
+        Segment segment = new Segment(disc1, disc2, theColor);
+
         // println(segment.toString() + " | distance: " + distance + " | radiusSum: " + radiusSum);
         segments.add(segment);
     }
