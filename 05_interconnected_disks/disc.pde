@@ -40,8 +40,9 @@ class Disc {
         circle(this.xpos, this.ypos, this.rad);
 
         // the dot in the center:
-        fill(0, 0, 0, this.opacity);
-        circle(this.xpos, this.ypos, 4);   // original 3
+        // fill(0, 0, 0, 50);  // black with half opacity
+        fill(segmentColor);
+        circle(this.xpos, this.ypos, 3);   // original 3
     }
 
     void updatePosition() {

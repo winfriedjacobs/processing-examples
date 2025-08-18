@@ -58,7 +58,7 @@ void handleOverlapping(Disc disc1, Disc disc2) {
 
 
 void drawSegments() {
-    stroke(180,180,180);
+    stroke(segmentColor);
     for(Segment segment: segments) {
         line(segment.a.x, segment.a.y, segment.b.x, segment.b.y);
     }

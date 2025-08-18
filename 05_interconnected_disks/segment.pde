@@ -15,3 +15,6 @@ class Segment {  // should not have a direction... maybe a Set?
         return "Segment(" + this.a.toString() + "," + this.b.toString() + ")";
     }
 }
+
+
+color segmentColor = color(150, 150, 150);
