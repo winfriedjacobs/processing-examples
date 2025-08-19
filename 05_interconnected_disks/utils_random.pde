@@ -24,13 +24,13 @@ color randomColor(int opacity) {
 }
 
 
-int randomXPos(int radius) {
-    return (int)random(radius, width - radius);
+float randomXPos(int radius) {
+    return (float) random(radius, width - radius);
 }
 
-int randomYPos(int radius) {
+float randomYPos(int radius) {
     // return height / 2 + radius;
-    return (int)random(radius, height - radius);
+    return (float) random(radius, height - radius);
 }
 
 int randomRadius(){
@@ -44,3 +44,8 @@ int randomRadius(){
     int maxRadius = (int)random(min, max);
     return (int)random(min, maxRadius);
 }
+
+Point randomPosition(int radius) {
+    return new Point(randomXPos(radius), randomYPos(radius));
+}
+

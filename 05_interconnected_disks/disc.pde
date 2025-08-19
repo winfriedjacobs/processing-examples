@@ -2,9 +2,14 @@ class Disc {
     public String name;
     public int rad;
 
-    // Starting position of shape
-    public float xpos;
-    public float ypos;
+    // // Starting position of shape
+    // public float xposStart;
+    // public float xposEnd;
+    // public float yposStart;
+    // public float yposEnd;
+
+    // Current position of shape
+    public Point pos;
 
     // Speed of the shape
     public float xspeed;
@@ -28,36 +33,33 @@ class Disc {
 
         this.rad = randomRadius();
 
-        this.xpos = randomXPos(this.rad);
-        this.ypos = randomYPos(this.rad);
-
+        this.pos = randomPosition(this.rad);
     }
 
     void render() {
         // the disc:
         noStroke();
         fill(this.fillColor);
-        circle(this.xpos, this.ypos, this.rad);
+        circle(this.pos.x, this.pos.y, this.rad);
 
         // the dot in the center:
         fill(0, 0, 0, 50);  // black with half opacity
         // fill(segmentColor);
-        circle(this.xpos, this.ypos, 3);   // original 3
+        circle(this.pos.x, this.pos.y, 3);   // original 3
     }
 
     void updatePosition() {
 
       // Test to see if the shape exceeds the boundaries of the screen
       // If it does, reverse its direction by multiplying by -1
-      if (this.xpos > width - this.rad || this.xpos < this.rad) {
+      if (this.pos.x > width - this.rad || this.pos.x < this.rad) {
         this.xdirection *= -1;
       }
-      if (this.ypos > height - this.rad || this.ypos < this.rad) {
+      if (this.pos.y > height - this.rad || this.pos.y < this.rad) {
         this.ydirection *= -1;
       }
 
-      this.xpos += (this.xspeed * this.xdirection);
-      this.ypos += (this.yspeed * this.ydirection);
+      this.pos.move(this.xspeed * this.xdirection, this.yspeed * this.ydirection);
     }
 
     void changeSpeed() {
@@ -66,7 +68,7 @@ class Disc {
     }
 
     Point center() {
-        return new Point(this.xpos, this.ypos);
+        return new Point(this.pos);
     }
 
     void draw() {
