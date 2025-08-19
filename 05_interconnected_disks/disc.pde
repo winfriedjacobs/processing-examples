@@ -59,7 +59,7 @@ class Disc {
             }
         }
 
-        println("alpha: " + alpha);
+        // println("alpha: " + alpha);
 
         color fillColor = alpha >= 0
             ? color(this.fillColor, alpha)

@@ -36,10 +36,6 @@ void setup()
 
 
 void draw() {
-    if (keyPressed) {
-        return;
-    }
-
     for (Disc d : discs.values()) {
         d.updatePosition();
     }
@@ -51,4 +47,12 @@ void draw() {
         d.draw();
         drawSegments();
     }
+}
+
+void keyPressed() {
+  noLoop();  // Holding down a key stops looping
+}
+
+void keyReleased() {
+  loop();  // Releasing the key restarts looping draw()
 }
