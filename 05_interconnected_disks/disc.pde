@@ -3,10 +3,8 @@ class Disc {
     public int rad;
 
     // // Starting position of shape
-    // public float xposStart;
-    // public float xposEnd;
-    // public float yposStart;
-    // public float yposEnd;
+    public Point posStart;
+    public Point posEnd;
 
     // Current position of shape
     public Point pos;
@@ -21,7 +19,7 @@ class Disc {
     color fillColor;
     int opacity = MAX_OPACITY;
 
-   public Disc(String name){
+    public Disc(String name){
         this.name = name;
         this.fillColor = randomColor(this.opacity);
 
