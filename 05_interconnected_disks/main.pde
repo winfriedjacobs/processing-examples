@@ -29,17 +29,7 @@ void setup()
   frameRate(30);
   ellipseMode(RADIUS);
 
-  /*
-  // this is moved to the DiscAdderThread class
-  for(int i = 0; i < COUNT_DISKS; i++) {
-      String name = "disc_" + i;
-      discs.put(
-        name,
-        new Disc(name)
-    );
-  }
-  */
-  discAdderThread = new DiscAdderThread();
+  discAdderThread = new DiscAdderThread(discs);
   discAdderThread.start();
 
   background(backgroundColor);

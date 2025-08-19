@@ -3,11 +3,17 @@ int COUNT_DISKS = 15;
 
 
 class DiscAdderThread extends Thread {
+  SortedMap<String, Disc> discs;  // actually a ConcurrentSkipListMap -> allows concurrency / parallel execution
+
+  DiscAdderThread(SortedMap<String, Disc> discs) {
+    this.discs = discs;
+  }
+
   public void run() {
 
     for(int i = 0; i < COUNT_DISKS && !isInterrupted(); i++) {
         String name = "disc_" + i;
-        discs.put(
+        this.discs.put(
             name,
             new Disc(name)
         );
