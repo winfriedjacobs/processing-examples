@@ -3,18 +3,11 @@ class Disc {
     public int rad;
 
     // // Starting position of shape
-    public Point posStart;
-    public Point posEnd;
+    public ArrayList<Point> steps;
+    public int currentStep = 0;
 
     // Current position of shape
     public Point pos;
-
-    // Speed of the shape
-    public float xspeed;
-    public float yspeed;
-
-    public int xdirection = 1;  // Left or Right
-    public int ydirection = 1;  // Top or Bottom
 
     color fillColor;
     int opacity = MAX_OPACITY;
@@ -22,16 +15,27 @@ class Disc {
     public Disc(String name){
         this.name = name;
         this.fillColor = randomColor(this.opacity);
-
-        this.xspeed = randomSpeed();
-        this.yspeed = randomSpeed();
-
-        this.xdirection = randomDirection();
-        this.ydirection = randomDirection();
-
         this.rad = randomRadius();
 
-        this.pos = randomPosition(this.rad);
+        int numberOfSteps = (int) random(1300, 1700);  // todo
+        this.steps = new ArrayList<Point>();
+
+        Point startPos = randomPosition(this.rad);
+        Point endPos = randomPosition(this.rad);
+
+        float xdiff = (endPos.x - startPos.x) / numberOfSteps;
+        float ydiff = (endPos.y - startPos.y) / numberOfSteps;
+
+        int i;
+        float currentX;
+        float currentY;
+        for (
+            i = 0, currentX = startPos.x, currentY = startPos.y;
+            i < numberOfSteps - 1;
+            i++, currentX += xdiff, currentY += ydiff
+        ) {
+            this.steps.add(new Point(currentX, currentY));
+        }
     }
 
     void render() {
@@ -47,34 +51,27 @@ class Disc {
     }
 
     void updatePosition() {
-
-      // Test to see if the shape exceeds the boundaries of the screen
-      // If it does, reverse its direction by multiplying by -1
-      if (this.pos.x > width - this.rad || this.pos.x < this.rad) {
-        this.xdirection *= -1;
+      // println("updatePosition " + this.steps.size());
+      if(this.steps.size() > 0) {
+        this.pos = this.steps.remove(0);  // unshift
+      } else {
+        this.removeMeFromDiscs();
       }
-      if (this.pos.y > height - this.rad || this.pos.y < this.rad) {
-        this.ydirection *= -1;
-      }
-
-      this.pos.move(this.xspeed * this.xdirection, this.yspeed * this.ydirection);
-    }
-
-    void changeSpeed() {
-        this.xspeed = Math.max(0, this.xspeed - 0.05);
-        this.yspeed = Math.max(0, this.yspeed - 0.05);
     }
 
     Point center() {
         return new Point(this.pos);
     }
 
-    void draw() {
-      // was the main draw function
+    void removeMeFromDiscs() {
+        discs.remove(this.name);
+    }
 
+    void draw() {
       this.updatePosition();
       this.render();
 
       // this.changeSpeed();
     }
+
 }

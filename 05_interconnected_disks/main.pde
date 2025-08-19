@@ -40,6 +40,9 @@ void draw() {
         return;
     }
 
+    for (Disc d : discs.values()) {
+        d.updatePosition();
+    }
     calculateDistances();
 
     background(backgroundColor);

@@ -3,13 +3,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.SortedMap;
-import java.util.TreeMap;
+// import java.util.TreeMap;
+import java.util.concurrent.ConcurrentSkipListMap;
 
 
 
 // globals
 
-SortedMap<String, Disc> discs = new TreeMap<String, Disc>();
+SortedMap<String, Disc> discs = new ConcurrentSkipListMap<String, Disc>();
 List<Segment> segments = new ArrayList<Segment>();
 
 
@@ -39,6 +40,9 @@ void calculateDistances() {
 
 
 void handleOverlapping(Disc disc1, Disc disc2) {
+
+    // println("handleOverlapping" + disc1.pos + " " + disc2.pos);
+
     // they are always sorted descending by their name
     // a) calculate distance and sum of radiusses
     float distance = disc1.pos.distance(disc2.pos);
