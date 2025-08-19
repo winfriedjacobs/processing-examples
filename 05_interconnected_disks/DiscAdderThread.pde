@@ -10,13 +10,15 @@ class DiscAdderThread extends Thread {
   }
 
   public void run() {
-
-    for(int i = 0; i < COUNT_DISKS && !isInterrupted(); i++) {
-        String name = "disc_" + i;
-        this.discs.put(
-            name,
-            new Disc(name)
-        );
+    // repeatedly tries to create up to COUNT_DISKS new discs
+    for(int i = 0; !isInterrupted(); i = this.increment(i)) {
+        if (this.discs.size() < COUNT_DISKS) {
+            String name = "disc_" + i;
+            this.discs.put(
+                name,
+                new Disc(name)
+            );
+        }
 
         try {
             Thread.sleep(1000); // Pause for 1 second
@@ -26,4 +28,10 @@ class DiscAdderThread extends Thread {
         }
     }
   }
+
+  int increment(int i) {
+    // safety method: we loop forever but do not create more than e.g. 100 discs
+    return i > 100 ? 0 : i + 1;
+  }
 }
+
