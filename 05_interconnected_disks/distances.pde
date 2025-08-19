@@ -8,12 +8,6 @@ import java.util.concurrent.ConcurrentSkipListMap;
 
 
 
-// globals
-
-SortedMap<String, Disc> discs = new ConcurrentSkipListMap<String, Disc>();
-List<Segment> segments = new ArrayList<Segment>();
-
-
 void recursivelyCalculateDistances(SortedMap<String, Disc> currentDiscs) {
     // println("recursivelyCalculateDistances, size: " + currentDiscs.size());
 

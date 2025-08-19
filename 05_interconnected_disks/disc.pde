@@ -1,3 +1,5 @@
+int MAX_OPACITY = 50;  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
+
 class Disc {
     public String name;
     public int rad;
