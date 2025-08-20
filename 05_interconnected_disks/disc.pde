@@ -26,8 +26,8 @@ class Disc {
     public int currentStep = 0;
     public int numberOfSteps;
 
-    // Current position of shape
-    public PVector pos;
+    // Current step
+    public Step step;
 
     color fillColor;
 
@@ -46,21 +46,18 @@ class Disc {
 
         noStroke();
         fill(fillColor);
-        circle(this.pos.x, this.pos.y, this.rad);
+        circle(this.step.pos.x, this.step.pos.y, this.rad);
 
         // the dot in the center:
         fill(0, 0, 0, 50);  // black with half opacity
         // fill(segmentColor);
-        circle(this.pos.x, this.pos.y, 3);   // original 3
+        circle(this.step.pos.x, this.step.pos.y, 3);   // original 3
     }
 
     void updatePosition() {
       // println("updatePosition " + this.steps.size());
       if(this.steps.size() > 0) {
-        Step step =  this.steps.remove(0);  // unshift
-        this.pos = step.pos;
-        this.opacity = step.opacity;
-
+        this.step = this.steps.remove(0);  // unshift
         this.currentStep++;
       } else {
         this.removeMeFromDiscs();
@@ -68,7 +65,7 @@ class Disc {
     }
 
     PVector center() {
-        return this.pos.copy();
+        return this.step.pos.copy();
     }
 
     void removeMeFromDiscs() {

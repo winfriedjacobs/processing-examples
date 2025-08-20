@@ -35,11 +35,11 @@ void calculateDistances() {
 
 void handleOverlapping(Disc disc1, Disc disc2) {
 
-    // println("handleOverlapping" + disc1.pos + " " + disc2.pos);
+    // println("handleOverlapping" + disc1.step.pos + " " + disc2.step.pos);
 
     // they are always sorted descending by their name
     // a) calculate distance and sum of radiusses
-    float distance = disc1.pos.dist(disc2.pos);
+    float distance = disc1.step.pos.dist(disc2.step.pos);
     float radiusSum = disc1.rad + disc2.rad;
 
     // println("Discs: " + disc1.name + " | " + disc2.name);
