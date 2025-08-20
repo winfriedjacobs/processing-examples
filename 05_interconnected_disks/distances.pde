@@ -47,8 +47,12 @@ void handleOverlapping(Disc disc1, Disc disc2) {
     if(distance < radiusSum) {
         float threshold = 25; // constant
         float diff = radiusSum - distance;
-        color theColor = diff < threshold
-            ? color(segmentColor, 50- (threshold - diff) ) // nur noch geringe Überlappung -> reduce opacity, starting from 50
+        int alpha = diff < threshold
+            ? alphaFromDistance(diff, threshold) // nur noch geringe Überlappung -> reduce opacity, starting from 50
+            : -1;
+
+        color theColor = (alpha >= 0)
+            ? color(segmentColor, alpha)
             : segmentColor; // uses segmentColor
 
         Segment segment = new Segment(disc1, disc2, theColor);
