@@ -41,14 +41,12 @@ void draw() {
        d.updatePosition();
     }
 
-    calculateDistances();
-
     background(backgroundColor);
     for (Disc d : discs.values()) {
         d.draw();
     }
 
-    // assumingly because of runtime issues, drawSegments() can not be called immediately after calculateDistances() ...
+    calculateDistances();
     drawSegments();
 }
 

@@ -37,7 +37,7 @@ class Disc {
         this.fillColor = randomColor(MAX_OPACITY);
         this.rad = randomRadius();
 
-        this.numberOfSteps = (int) random(1300, 1700);  // todo
+        this.numberOfSteps = (int) random(450, 950);  // todo  OLD: 1300, 1700
         this.steps = createSteps(this.rad, this.numberOfSteps);
     }
 
