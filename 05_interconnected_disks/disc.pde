@@ -44,27 +44,7 @@ class Disc {
 
     void render() {
         // the disc:
-        int threshold = 150;  // step number 0..threshold: fade-in, numberOfSteps-threshold..numberOfStep: fade-out
-
-        int alpha = -1;
-
-        // Achtung, das neue Alpha wird zur vorhandenden Opacity hinzu"kombiniert" (sofern > 0)
-        // deswegen muss es von 0 bis 255 hochgezählt werden
-        if (this.currentStep < threshold) {
-            alpha = alphaFromDistance(this.currentStep, threshold);
-        } else {
-            int distanceToEnd = this.numberOfSteps - this.currentStep;
-            if (distanceToEnd < threshold) {
-                alpha = alphaFromDistance(distanceToEnd, threshold);
-            }
-        }
-        // else alpha remains -1
-
-        // println("alpha: " + alpha);
-
-        color fillColor = alpha >= 0
-            ? color(this.fillColor, alpha)
-            : this.fillColor;
+        color fillColor = updateFillColor(this.fillColor, this.currentStep, this.numberOfSteps);
 
         noStroke();
         fill(fillColor);
@@ -100,5 +80,31 @@ class Disc {
 
       // this.changeSpeed();
     }
-
 }
+
+    color updateFillColor(color initialFillColor, int currentStep, int numberOfSteps) {
+
+        int threshold = 150;  // step number 0..threshold: fade-in, numberOfSteps-threshold..numberOfStep: fade-out
+
+        int alpha = -1;
+
+        // Achtung, das neue Alpha wird zur vorhandenden Opacity hinzu"kombiniert" (sofern > 0)
+        // deswegen muss es von 0 bis 255 hochgezählt werden
+        if (currentStep < threshold) {
+            alpha = alphaFromDistance(currentStep, threshold);
+        } else {
+            int distanceToEnd = numberOfSteps - currentStep;
+            if (distanceToEnd < threshold) {
+                alpha = alphaFromDistance(distanceToEnd, threshold);
+            }
+        }
+        // else alpha remains -1
+
+        // println("alpha: " + alpha);
+
+        color fillColor = alpha >= 0
+            ? color(initialFillColor, alpha)
+            : initialFillColor;
+
+        return fillColor;
+    }
