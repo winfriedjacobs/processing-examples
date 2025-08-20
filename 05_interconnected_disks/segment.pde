@@ -13,18 +13,15 @@ class Segment {  // should not have a direction... maybe a Set?
         this(a, b, segmentColor);
     }
 
-    public Segment(Disc a, Disc b) {
-        this(a.center(), b.center());
+    public Segment(Disc d1, Disc d2) {
+        this(d1.center(), d2.center());
     }
 
-    public Segment(Disc a, Disc b, color myColor) {
-        this(a.center(), b.center(), myColor);
+    public Segment(Disc d1, Disc d2, color myColor) {
+        this(d1.center(), d2.center(), myColor);
     }
 
     public String toString() {
         return "Segment(" + this.a.toString() + "," + this.b.toString() + ")";
     }
 }
-
-
-color segmentColor = color(150, 150, 150, 50);

@@ -10,6 +10,7 @@ import java.util.List;
 // constants
 
 color backgroundColor = color(230,230,230);  // 102
+color segmentColor = color(150, 150, 150, 50);
 
 
 // globals
@@ -17,7 +18,6 @@ color backgroundColor = color(230,230,230);  // 102
 SortedMap<String, Disc> discs = new ConcurrentSkipListMap<String, Disc>();
 List<Segment> segments = new ArrayList<Segment>();
 DiscAdderThread discAdderThread;
-
 
 
 // processing functions
