@@ -51,15 +51,14 @@ class Disc {
         // Achtung, das neue Alpha wird zur vorhandenden Opacity hinzu"kombiniert" (sofern > 0)
         // deswegen muss es von 0 bis 255 hochgezählt werden
         if (this.currentStep < threshold) {
-            alpha = this.currentStep * 255 / threshold;
+            alpha = alphaFromDistance(this.currentStep, threshold);
         } else {
             int distanceToEnd = this.numberOfSteps - this.currentStep;
             if (distanceToEnd < threshold) {
-                alpha = distanceToEnd * 255 / threshold;
-            } else {
-                alpha = -1;
+                alpha = alphaFromDistance(distanceToEnd, threshold);
             }
         }
+        // else alpha remains -1
 
         // println("alpha: " + alpha);
 

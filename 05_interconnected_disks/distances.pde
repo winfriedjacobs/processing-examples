@@ -45,9 +45,10 @@ void handleOverlapping(Disc disc1, Disc disc2) {
     // println("Discs: " + disc1.name + " | " + disc2.name);
     // println("distance: " + distance + " | radiusSum: " + radiusSum);
     if(distance < radiusSum) {
+        float threshold = 25; // constant
         float diff = radiusSum - distance;
-        color theColor = diff < 25
-            ? color(150, 150, 150, diff * 2) // nur noch geringe Überlappung -> reduce opacity, starting from 50
+        color theColor = diff < threshold
+            ? color(segmentColor, 50- (threshold - diff) ) // nur noch geringe Überlappung -> reduce opacity, starting from 50
             : segmentColor; // uses segmentColor
 
         Segment segment = new Segment(disc1, disc2, theColor);
@@ -59,7 +60,7 @@ void handleOverlapping(Disc disc1, Disc disc2) {
 
 
 void drawSegments() {
-    strokeWeight(0.5);
+    strokeWeight(3);   // original: 0.5
     for(Segment segment: segments) {
         stroke(segment.myColor);
         line(segment.a.x, segment.a.y, segment.b.x, segment.b.y);
