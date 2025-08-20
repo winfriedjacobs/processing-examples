@@ -1,15 +1,15 @@
 class Segment {  // should not have a direction... maybe a Set?
-    public Point a;
-    public Point b;
+    public PVector a;
+    public PVector b;
     public color myColor;
 
-    public Segment(Point a, Point b, color myColor) {
+    public Segment(PVector a, PVector b, color myColor) {
         this.a = a;
         this.b = b;
         this.myColor = myColor;
     }
 
-    public Segment(Point a, Point b) {
+    public Segment(PVector a, PVector b) {
         this(a, b, segmentColor);
     }
 

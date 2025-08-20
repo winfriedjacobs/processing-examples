@@ -5,13 +5,13 @@ class Disc {
     public int rad;
 
     // // Starting position of shape
-    public ArrayList<Point> steps;
+    public ArrayList<PVector> steps;
 
     public int currentStep = 0;
     public int numberOfSteps;
 
     // Current position of shape
-    public Point pos;
+    public PVector pos;
 
     color fillColor;
     int opacity = MAX_OPACITY;
@@ -22,10 +22,10 @@ class Disc {
         this.rad = randomRadius();
 
         this.numberOfSteps = (int) random(1300, 1700);  // todo
-        this.steps = new ArrayList<Point>();
+        this.steps = new ArrayList<PVector>();
 
-        Point startPos = randomPosition(this.rad);
-        Point endPos = randomPosition(this.rad);
+        PVector startPos = randomPosition(this.rad);
+        PVector endPos = randomPosition(this.rad);
 
         float xdiff = (endPos.x - startPos.x) / this.numberOfSteps;
         float ydiff = (endPos.y - startPos.y) / this.numberOfSteps;
@@ -38,7 +38,7 @@ class Disc {
             i < this.numberOfSteps - 1;
             i++, currentX += xdiff, currentY += ydiff
         ) {
-            this.steps.add(new Point(currentX, currentY));
+            this.steps.add(new PVector(currentX, currentY));
         }
     }
 
@@ -87,8 +87,8 @@ class Disc {
       }
     }
 
-    Point center() {
-        return new Point(this.pos);
+    PVector center() {
+        return this.pos.copy();
     }
 
     void removeMeFromDiscs() {

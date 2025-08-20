@@ -39,7 +39,7 @@ void handleOverlapping(Disc disc1, Disc disc2) {
 
     // they are always sorted descending by their name
     // a) calculate distance and sum of radiusses
-    float distance = disc1.pos.distance(disc2.pos);
+    float distance = disc1.pos.dist(disc2.pos);
     float radiusSum = disc1.rad + disc2.rad;
 
     // println("Discs: " + disc1.name + " | " + disc2.name);

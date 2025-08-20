@@ -45,7 +45,7 @@ int randomRadius(){
     return (int)random(min, maxRadius);
 }
 
-Point randomPosition(int radius) {
-    return new Point(randomXPos(radius), randomYPos(radius));
+PVector randomPosition(int radius) {
+    return new PVector(randomXPos(radius), randomYPos(radius));
 }
 
