@@ -1,16 +1,17 @@
 int MAX_OPACITY = 50;  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
+int MAX_ALPHA = 255;
 
 class Step {
     public PVector pos;
-    public int opacity;
+    public int alpha;
 
-    public Step(PVector pos, int opacity) {
+    public Step(PVector pos, int alpha) {
         this.pos = pos;
-        this.opacity = opacity;
+        this.alpha = alpha;  // will later be combined with the opacity of the disc
     }
 
     public Step(PVector pos) {
-        this(pos, MAX_OPACITY);
+        this(pos, MAX_ALPHA);
     }
 }
 

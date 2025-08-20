@@ -34,7 +34,6 @@ void calculateDistances() {
 
 
 void handleOverlapping(Disc disc1, Disc disc2) {
-
     // println("handleOverlapping" + disc1.step.pos + " " + disc2.step.pos);
 
     // they are always sorted descending by their name
