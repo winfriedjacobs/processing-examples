@@ -38,7 +38,7 @@ void setup()
 
 void draw() {
     for (Disc d : discs.values()) {
-        d.updatePosition();
+       d.updatePosition();
     }
 
     calculateDistances();
@@ -46,8 +46,10 @@ void draw() {
     background(backgroundColor);
     for (Disc d : discs.values()) {
         d.draw();
-        drawSegments();
     }
+
+    // assumingly because of runtime issues, drawSegments() can not be called immediately after calculateDistances() ...
+    drawSegments();
 }
 
 void keyPressed() {

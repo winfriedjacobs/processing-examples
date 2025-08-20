@@ -74,7 +74,7 @@ class Disc {
     }
 
     void draw() {
-      this.updatePosition();
+      // this.updatePosition();  // removed, because updatePosition is called in an extra loop in main
       this.render();
 
       // this.changeSpeed();
