@@ -21,6 +21,11 @@ class Segment {  // should not have a direction... maybe a Set?
         this(d1.center(), d2.center(), myColor);
     }
 
+    public void draw() {
+        stroke(this.myColor);
+        line(this.a.x, this.a.y, this.b.x, this.b.y);
+    }
+
     public String toString() {
         return "Segment(" + this.a.toString() + "," + this.b.toString() + ")";
     }

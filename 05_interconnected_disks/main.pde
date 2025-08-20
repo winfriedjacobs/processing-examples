@@ -10,7 +10,7 @@ import java.util.List;
 // constants
 
 color backgroundColor = color(230,230,230);  // 102
-color segmentColor = color(150, 150, 150, 50);
+color segmentColor = color(50, 50, 50, 50);
 
 
 // globals
