@@ -43,7 +43,7 @@ class Disc {
 
     void render() {
         // the disc:
-        color fillColor = updateFillColor(this.fillColor, this.currentStep, this.numberOfSteps);
+        color fillColor = updateFillColor(this.fillColor, this.step.alpha);
 
         noStroke();
         fill(fillColor);
@@ -81,10 +81,47 @@ class Disc {
     }
 }
 
-color updateFillColor(color initialFillColor, int currentStep, int numberOfSteps) {
+color updateFillColor(color initialFillColor, int alpha) {
+    // -1 <= alpha <= 255
+    color fillColor = alpha >= 0
+        ? color(initialFillColor, alpha)
+        : initialFillColor;
 
+    return fillColor;
+}
+
+
+ArrayList<Step> createSteps(int discRadius, int numberOfSteps) {
     int threshold = 150;  // step number 0..threshold: fade-in, numberOfSteps-threshold..numberOfStep: fade-out
 
+    ArrayList<Step> steps = new ArrayList<Step>();
+
+    PVector startPos = randomPosition(discRadius);
+    PVector endPos = randomPosition(discRadius);
+
+    float xdiff = (endPos.x - startPos.x) / numberOfSteps;
+    float ydiff = (endPos.y - startPos.y) / numberOfSteps;
+
+    int i;  // stepNumber
+    float currentX;
+    float currentY;
+    for (
+        i = 0, currentX = startPos.x, currentY = startPos.y;
+        i < numberOfSteps - 1;
+        i++, currentX += xdiff, currentY += ydiff
+    ) {
+        PVector pos = new PVector(currentX, currentY);
+        // Create the “appear/disappear alphas” in advance along with the steps, not during rendering.
+        // This is even better considering that the creation of a Disc is performed in an extra thread.
+        int alpha = createAlpha(i, numberOfSteps, threshold);
+        steps.add(new Step(pos, alpha));
+    }
+
+    return steps;
+}
+
+
+int createAlpha(int currentStep, int numberOfSteps, int threshold) {
     int alpha = -1;
 
     // Achtung, das neue Alpha wird zur vorhandenden Opacity hinzu"kombiniert" (sofern > 0)
@@ -101,34 +138,5 @@ color updateFillColor(color initialFillColor, int currentStep, int numberOfSteps
 
     // println("alpha: " + alpha);
 
-    color fillColor = alpha >= 0
-        ? color(initialFillColor, alpha)
-        : initialFillColor;
-
-    return fillColor;
-}
-
-
-ArrayList<Step> createSteps(int discRadius, int numberOfSteps) {
-    ArrayList<Step> steps = new ArrayList<Step>();
-
-    PVector startPos = randomPosition(discRadius);
-    PVector endPos = randomPosition(discRadius);
-
-    float xdiff = (endPos.x - startPos.x) / numberOfSteps;
-    float ydiff = (endPos.y - startPos.y) / numberOfSteps;
-
-    int i;
-    float currentX;
-    float currentY;
-    for (
-        i = 0, currentX = startPos.x, currentY = startPos.y;
-        i < numberOfSteps - 1;
-        i++, currentX += xdiff, currentY += ydiff
-    ) {
-        PVector pos = new PVector(currentX, currentY);
-        steps.add(new Step(pos));
-    }
-
-    return steps;
+    return alpha;
 }
