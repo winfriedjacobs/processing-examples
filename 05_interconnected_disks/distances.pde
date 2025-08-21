@@ -9,8 +9,6 @@ import java.util.concurrent.ConcurrentSkipListMap;
 
 
 void recursivelyCalculateDistances(SortedMap<String, Disc> currentDiscs) {
-    // println("recursivelyCalculateDistances, size: " + currentDiscs.size());
-
     if (currentDiscs.size() < 2) {
         return;
     }
@@ -55,17 +53,13 @@ void handleOverlapping(Disc disc1, Disc disc2) {
             : MAX_ALPHA;
 
         // if alpha is greater than the alphas of the discs, take the mininum value:
-        // println("alphas " + alpha + " | " + disc1.step.alpha + " | " + disc2.step.alpha);
         alpha = Math.min(alpha, Math.min(disc1.step.alpha, disc2.step.alpha));
-        // println("minAlpha " + alpha);
 
         color theColor = (alpha == MAX_ALPHA)
             ? segmentColor // leave segmentColor unchanged when alpha == MAX_ALPHA
             : color(segmentColor, alpha);
 
         Segment segment = new Segment(disc1, disc2, theColor);
-
-        // println(segment.toString() + " | distance: " + distance + " | radiusSum: " + radiusSum);
         segments.add(segment);
     }
 }

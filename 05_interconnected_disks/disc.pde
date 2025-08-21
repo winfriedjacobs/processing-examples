@@ -43,7 +43,6 @@ class Disc {
 
     void render(PVector pos, color originalFillColor, int alpha, int radius) {
         // the disc:
-        // println("render " + fillColor + " " + alpha);
         color fillColor = updateFillColor(originalFillColor, alpha);
 
         noStroke();
@@ -57,7 +56,6 @@ class Disc {
     }
 
     void updatePosition() {
-      // println("updatePosition " + this.steps.size());
       if(this.steps.size() > 0) {
         this.step = this.steps.remove(0);  // unshift
         this.currentStep++;
@@ -87,9 +85,8 @@ class Disc {
 color updateFillColor(color initialFillColor, int alpha) {
     // 0 <= alpha <= 255
     color fillColor = alpha == MAX_ALPHA
-        ? color(initialFillColor, alpha)
-        : initialFillColor;
-
+        ? initialFillColor
+        : color(initialFillColor, alpha);
     return fillColor;
 }
 
@@ -128,7 +125,7 @@ ArrayList<Step> createSteps(int discRadius, int numberOfSteps) {
 int createAlpha(int currentStep, int numberOfSteps, int threshold) {
     int alpha = MAX_ALPHA;
 
-    // Achtung, das neue Alpha wird zur vorhandenden Opacity hinzu"kombiniert" (sofern > 0)
+    // Achtung, das neue Alpha wird zur vorhandenden Opacity hinzu"kombiniert" (sofern > 0),
     // deswegen muss es von 0 bis 255 hochgezählt werden
     if (currentStep < threshold) {
         alpha = alphaFromDistance(currentStep, threshold);
@@ -139,8 +136,6 @@ int createAlpha(int currentStep, int numberOfSteps, int threshold) {
         }
     }
     // else alpha remains MAX_ALPHA
-
-    // println("alpha: " + alpha);
 
     return alpha;
 }
