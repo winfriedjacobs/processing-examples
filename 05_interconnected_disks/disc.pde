@@ -117,6 +117,7 @@ ArrayList<Step> createSteps(int discRadius, int numberOfSteps) {
         // Create the “appear/disappear alphas” in advance along with the steps, not during rendering.
         // This is even better considering that the creation of a Disc is performed in an extra thread.
         int alpha = createAlpha(i, numberOfSteps, threshold);
+
         steps.add(new Step(pos, alpha));
     }
 

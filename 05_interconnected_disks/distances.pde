@@ -17,10 +17,15 @@ void recursivelyCalculateDistances(SortedMap<String, Disc> currentDiscs) {
 
     String lastKey = currentDiscs.lastKey();
     Disc lastDisc = currentDiscs.get(lastKey);
+
+    if (lastDisc == null || lastDisc.step == null) {
+        return;
+    }
+
     SortedMap<String, Disc> other = currentDiscs.headMap(lastKey);
 
     for (Disc otherDisc: other.values()) {
-        if (otherDisc != null) {
+        if (otherDisc != null && otherDisc.step != null) {
             handleOverlapping(lastDisc, otherDisc);
         }
     }
@@ -38,6 +43,7 @@ void calculateDistances() {
 void handleOverlapping(Disc disc1, Disc disc2) {
     // they are always sorted descending by their name
     // a) calculate distance and sum of radiusses
+
     float distance = disc1.step.pos.dist(disc2.step.pos);
     float radiusSum = disc1.rad + disc2.rad;
 
@@ -49,15 +55,13 @@ void handleOverlapping(Disc disc1, Disc disc2) {
             : MAX_ALPHA;
 
         // if alpha is greater than the alphas of the discs, take the mininum value:
-
-        println("alphas " + alpha + " | " + disc1.step.alpha + " | " + disc2.step.alpha);
+        // println("alphas " + alpha + " | " + disc1.step.alpha + " | " + disc2.step.alpha);
         alpha = Math.min(alpha, Math.min(disc1.step.alpha, disc2.step.alpha));
-        println("minAlpha " + alpha);
+        // println("minAlpha " + alpha);
 
-
-        color theColor = (alpha >= 0)
-            ? color(segmentColor, alpha)
-            : segmentColor; // leave segmentColor unchanged when alpha == MAX_ALPHA
+        color theColor = (alpha == MAX_ALPHA)
+            ? segmentColor // leave segmentColor unchanged when alpha == MAX_ALPHA
+            : color(segmentColor, alpha);
 
         Segment segment = new Segment(disc1, disc2, theColor);
 
