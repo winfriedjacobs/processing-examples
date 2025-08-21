@@ -41,18 +41,19 @@ class Disc {
         this.steps = createSteps(this.rad, this.numberOfSteps);
     }
 
-    void render() {
+    void render(PVector pos, color originalFillColor, int alpha, int radius) {
         // the disc:
-        color fillColor = updateFillColor(this.fillColor, this.step.alpha);
+        // println("render " + fillColor + " " + alpha);
+        color fillColor = updateFillColor(originalFillColor, alpha);
 
         noStroke();
         fill(fillColor);
-        circle(this.step.pos.x, this.step.pos.y, this.rad);
+        circle(pos.x, pos.y, radius);
 
         // the dot in the center:
         fill(0, 0, 0, 50);  // black with half opacity
         // fill(segmentColor);
-        circle(this.step.pos.x, this.step.pos.y, 3);   // original 3
+        circle(pos.x, pos.y, 3);   // original 3
     }
 
     void updatePosition() {
@@ -75,15 +76,17 @@ class Disc {
 
     void draw() {
       // this.updatePosition();  // removed, because updatePosition is called in an extra loop in main
-      this.render();
+      if (this.step != null) {
+        this.render(this.step.pos, this.fillColor, this.step.alpha, this.rad);
+      }
 
       // this.changeSpeed();
     }
 }
 
 color updateFillColor(color initialFillColor, int alpha) {
-    // -1 <= alpha <= 255
-    color fillColor = alpha >= 0
+    // 0 <= alpha <= 255
+    color fillColor = alpha == MAX_ALPHA
         ? color(initialFillColor, alpha)
         : initialFillColor;
 
@@ -122,7 +125,7 @@ ArrayList<Step> createSteps(int discRadius, int numberOfSteps) {
 
 
 int createAlpha(int currentStep, int numberOfSteps, int threshold) {
-    int alpha = -1;
+    int alpha = MAX_ALPHA;
 
     // Achtung, das neue Alpha wird zur vorhandenden Opacity hinzu"kombiniert" (sofern > 0)
     // deswegen muss es von 0 bis 255 hochgezählt werden
@@ -134,7 +137,7 @@ int createAlpha(int currentStep, int numberOfSteps, int threshold) {
             alpha = alphaFromDistance(distanceToEnd, threshold);
         }
     }
-    // else alpha remains -1
+    // else alpha remains MAX_ALPHA
 
     // println("alpha: " + alpha);
 

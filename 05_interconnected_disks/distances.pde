@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.SortedMap;
 // import java.util.TreeMap;
 import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.Collections;
-import java.util.stream.Collectors;
 
 
 
@@ -22,7 +20,9 @@ void recursivelyCalculateDistances(SortedMap<String, Disc> currentDiscs) {
     SortedMap<String, Disc> other = currentDiscs.headMap(lastKey);
 
     for (Disc otherDisc: other.values()) {
-        handleOverlapping(lastDisc, otherDisc);
+        if (otherDisc != null) {
+            handleOverlapping(lastDisc, otherDisc);
+        }
     }
 
     recursivelyCalculateDistances(other);
@@ -36,8 +36,6 @@ void calculateDistances() {
 
 
 void handleOverlapping(Disc disc1, Disc disc2) {
-    // println("handleOverlapping" + disc1.step.pos + " " + disc2.step.pos);
-
     // they are always sorted descending by their name
     // a) calculate distance and sum of radiusses
     float distance = disc1.step.pos.dist(disc2.step.pos);
@@ -48,11 +46,14 @@ void handleOverlapping(Disc disc1, Disc disc2) {
         float diff = radiusSum - distance;
         int alpha = diff < threshold
             ? alphaFromDistance(diff, threshold) // nur noch geringe Überlappung -> reduce opacity
-            : -1;
+            : MAX_ALPHA;
 
         // if alpha is greater than the alphas of the discs, take the mininum value:
 
-        alpha = minOfThreeAlphas(alpha, disc1.step.alpha, disc2.step.alpha);
+        println("alphas " + alpha + " | " + disc1.step.alpha + " | " + disc2.step.alpha);
+        alpha = Math.min(alpha, Math.min(disc1.step.alpha, disc2.step.alpha));
+        println("minAlpha " + alpha);
+
 
         color theColor = (alpha >= 0)
             ? color(segmentColor, alpha)
@@ -71,22 +72,4 @@ void drawSegments() {
     for(Segment segment: segments) {
         segment.draw();
     }
-}
-
-int minOfThreeAlphas(int alpha1, int alpha2, int alpha3) {
-
-    println("alphas " + alpha1 + " | " + alpha2 + " | " + alpha3);
-
-    List<Integer> onlyPositiveAlphas = List.of(alpha1, alpha2, alpha3)
-                          .stream()
-                          .filter(n -> n >= 0)
-                          .collect(Collectors.toList());
-
-    int minAlpha = onlyPositiveAlphas.isEmpty()
-                    ? -1
-                    : Collections.min(onlyPositiveAlphas);
-
-    println("minAlpha " + minAlpha);
-
-    return minAlpha;
 }
