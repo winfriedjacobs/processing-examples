@@ -1,5 +1,5 @@
 
-int COUNT_DISKS = 15;
+int COUNT_DISKS = 10;
 
 
 class DiscAdderThread extends Thread {

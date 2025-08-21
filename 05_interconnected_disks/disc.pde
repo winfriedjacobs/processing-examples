@@ -1,4 +1,4 @@
-int MAX_OPACITY = 50;  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
+int MAX_OPACITY = 65; // 50-75 gehen gut  // between 0 and 255, e.g. 128 (or: TRANSPARENCY ...)
 int MAX_ALPHA = 255;
 
 class Step {
@@ -43,15 +43,15 @@ class Disc {
 
     void render(PVector pos, color originalFillColor, int alpha, int radius) {
         // the disc:
-        color fillColor = updateFillColor(originalFillColor, alpha);
+        color fillColor = updateColorWithAlpha(originalFillColor, alpha);
 
         noStroke();
         fill(fillColor);
         circle(pos.x, pos.y, radius);
 
         // the dot in the center:
-        fill(0, 0, 0, 50);  // black with half opacity
-        // fill(segmentColor);
+        color dotColor = updateColorWithAlpha(segmentColor, alpha);
+        fill(dotColor);
         circle(pos.x, pos.y, 3);   // original 3
     }
 
@@ -82,7 +82,7 @@ class Disc {
     }
 }
 
-color updateFillColor(color initialFillColor, int alpha) {
+color updateColorWithAlpha(color initialFillColor, int alpha) {
     // 0 <= alpha <= 255
     color fillColor = alpha == MAX_ALPHA
         ? initialFillColor
@@ -92,7 +92,7 @@ color updateFillColor(color initialFillColor, int alpha) {
 
 
 ArrayList<Step> createSteps(int discRadius, int numberOfSteps) {
-    int threshold = 150;  // step number 0..threshold: fade-in, numberOfSteps-threshold..numberOfStep: fade-out
+    int threshold = 25;  // gehen beide gut: 25, 50;  // step number 0..threshold: fade-in, numberOfSteps-threshold..numberOfStep: fade-out
 
     ArrayList<Step> steps = new ArrayList<Step>();
 
